@@ -62,7 +62,7 @@ impl MapGenerator {
               R: Rng
     {
         let file = &Path::new(self.config.output());
-        let mut hmap = g.generate(1024, 1024, rng);
+        let mut hmap = g.generate(*self.config.width(), *self.config.height(), rng);
         hmap.normalize();
         hmap.flatten();
 

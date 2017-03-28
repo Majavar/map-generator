@@ -98,6 +98,8 @@ fn main() {
             .set_seed(seed)
     } else if matches.value_of("generator").map_or(true, |g| g == "fractal") {
         config::MapGeneratorConfigBuilder::default()
+            .width(config::default_width())
+            .height(config::default_height())
             .generator(config::Generator::Fractal)
             .noise(Some(matches.value_of("noise")
                             .map(|s| FromStr::from_str(s).unwrap())
@@ -119,6 +121,8 @@ fn main() {
             .unwrap()
     } else {
         config::MapGeneratorConfigBuilder::default()
+            .width(config::default_width())
+            .height(config::default_height())
             .generator(matches.value_of("generator")
                            .map(|s| FromStr::from_str(s).unwrap())
                            .unwrap_or(config::Generator::Midpoint))

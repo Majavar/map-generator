@@ -168,6 +168,10 @@ impl ser::Serialize for Noise {
 
 #[derive(Builder, Debug, Deserialize, Serialize)]
 pub struct MapGeneratorConfig {
+    #[serde(default = "default_width")]
+    width: u32,
+    #[serde(default = "default_height")]
+    height: u32,
     generator: Generator,
     noise: Option<Noise>,
     scale: Option<f64>,
@@ -189,6 +193,14 @@ pub struct MapGeneratorConfig {
     output: String,
     #[serde(default = "default_seed")]
     seed: usize,
+}
+
+pub fn default_width() -> u32 {
+    1024
+}
+
+pub fn default_height() -> u32 {
+    1024
 }
 
 pub fn default_output() -> String {
@@ -242,6 +254,14 @@ impl MapGeneratorConfig {
 
         let contents = serde_yaml::to_string(self).map_err(|e| io::Error::new(io::ErrorKind::Other, e.description()))?;
         buffer.write_all(contents.as_bytes())
+    }
+
+    pub fn width(&self) -> &u32 {
+        &self.width
+    }
+
+    pub fn height(&self) -> &u32 {
+        &self.height
     }
 
     pub fn generator(&self) -> &Generator {
