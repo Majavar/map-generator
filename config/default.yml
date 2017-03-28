@@ -1,0 +1,23 @@
+---
+generator: fractal
+noise: gradient
+scale: 2
+octave: 10
+lacunarity: 2
+persistance: 0.5
+interpolation: cubic
+
+ramp:
+  colors:
+    - 0.00000000   2  43  68  # very dark blue: deep water
+    - 0.25000000   9  62  92  # dark blue: water
+    - 0.49000000  17  82 112  # blue: shallow water
+    - 0.50000000  69 108 118  # light blue: shore
+    - 0.51000000  42 102  41  # green: grass
+    - 0.75000000 115 128  77  # light green: veld
+    - 0.85000000 153 143  92  # brown: tundra
+    - 0.95000000 179 179 179  # grey: rocks
+    - 1.00000000 255 255 255  # white: snow
+light_position: "-1 -1 0"
+light: 255 255 204
+dark: 51 17 51

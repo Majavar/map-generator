@@ -1,0 +1,12 @@
+[package]
+name = "image"
+version = "0.1.0"
+authors = ["Nico <nico@redstar>"]
+
+[dependencies]
+image = "*"
+serde = "*"
+serde_derive = "*"
+
+heightmap = {path = "../heightmap"}
+noise2d = {path = "../noise2d"}

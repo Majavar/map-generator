@@ -1,0 +1,9 @@
+[package]
+name = "heightmap"
+version = "0.1.0"
+authors = ["Nico <nico@redstar>"]
+
+[dependencies]
+rand = "*"
+
+noise2d = {path = "../noise2d"}

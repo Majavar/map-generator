@@ -1,0 +1,16 @@
+[package]
+name = "map-generator"
+version = "0.1.0"
+authors = ["Nico <nico@redstar>"]
+
+[dependencies]
+clap = "*"
+derive_builder = "*"
+rand = "*"
+serde = "*"
+serde_derive = "*"
+serde_yaml = "*"
+
+heightmap = {path = "heightmap"}
+noise2d = {path = "noise2d"}
+image = {path = "image"}
