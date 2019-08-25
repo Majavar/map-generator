@@ -5,11 +5,11 @@ authors = ["Nico <nico@redstar>"]
 
 [dependencies]
 clap = "*"
-derive_builder = "*"
-rand = "*"
-serde = "*"
-serde_derive = "*"
-serde_yaml = "*"
+derive_builder = "0.4.*"
+rand = "0.3.*"
+serde = "0.9.*"
+serde_derive = "0.9.*"
+serde_yaml = "0.6.*"
 
 heightmap = {path = "heightmap"}
 noise2d = {path = "noise2d"}

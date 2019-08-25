@@ -4,9 +4,9 @@ version = "0.1.0"
 authors = ["Nico <nico@redstar>"]
 
 [dependencies]
-image = "*"
-serde = "*"
-serde_derive = "*"
+image = "0.12.*"
+serde = "0.9.*"
+serde_derive = "0.9.*"
 
 heightmap = {path = "../heightmap"}
 noise2d = {path = "../noise2d"}

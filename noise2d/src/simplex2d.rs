@@ -41,8 +41,8 @@ impl Simplex2d {
 
 impl Noise2d for Simplex2d {
     fn at(&self, x: f64, y: f64) -> f64 {
-        let f2 = 0.366025403784438646763723170752;
-        let g2 = 0.211324865405187117745425609748;
+        let f2 = 0.5 * (f64::sqrt(3.0) - 1.0);
+        let g2 = (3.0 - f64::sqrt(3.0)) / 6.0;
 
         let s = (x + y) * f2;
         let i = (x + s) as usize;

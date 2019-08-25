@@ -1,6 +1,3 @@
-#![feature(conservative_impl_trait)]
-#![feature(step_by)]
-
 extern crate noise2d;
 extern crate rand;
 
