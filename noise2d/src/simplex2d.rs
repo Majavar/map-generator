@@ -29,7 +29,7 @@ impl Simplex2d {
         }
         r.shuffle(&mut permutations);
 
-        Simplex2d { permutations: permutations }
+        Simplex2d { permutations }
     }
 
     fn idx(&self, x: usize, y: usize) -> u8 {
@@ -39,6 +39,7 @@ impl Simplex2d {
     }
 }
 
+#[allow(clippy::many_single_char_names)]
 impl Noise2d for Simplex2d {
     fn at(&self, x: f64, y: f64) -> f64 {
         let f2 = 0.5 * (f64::sqrt(3.0) - 1.0);

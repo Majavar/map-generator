@@ -27,9 +27,9 @@ impl<F> Value2d<F>
         }
 
         Value2d {
-            permutations: permutations,
-            values: values,
-            interpolate: interpolate,
+            permutations,
+            values,
+            interpolate,
         }
     }
 

@@ -34,13 +34,13 @@ impl Deserialize for Vec3 {
 
         let x = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
         let y = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
         let z = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
 
         Ok(Vec3::new(x, y, z))
     }
@@ -75,11 +75,11 @@ impl Normal for Heightmap {
 }
 
 pub trait Shadable {
-    fn shade(&mut self, hmap: &Heightmap, light: &Vec3, c0: &Color, c1: &Color);
+    fn shade(&mut self, hmap: &Heightmap, light: &Vec3, c0: Color, c1: Color);
 }
 
 impl Shadable for ImageBuffer<Rgb<u8>, Vec<u8>> {
-    fn shade(&mut self, hmap: &Heightmap, light: &Vec3, c0: &Color, c1: &Color) {
+    fn shade(&mut self, hmap: &Heightmap, light: &Vec3, c0: Color, c1: Color) {
         for y in 0..self.height() {
             for x in 0..self.width() {
                 if hmap.get(x, y) > 0.5 {
@@ -88,13 +88,13 @@ impl Shadable for ImageBuffer<Rgb<u8>, Vec<u8>> {
                     let p = self.get_pixel_mut(x, y);
 
                     *p = if d < 0.0 {
-                        **c1
+                        *c1
                     } else if d > 1.0 {
-                        **c0
+                        *c0
                     } else if d < 0.5 {
-                        *lerp(c1, &Color::new(p.data), 2.0 * d)
+                        *lerp(c1, Color::new(p.data), 2.0 * d)
                     } else {
-                        *lerp(&Color::new(p.data), c0, 2.0 * d - 1.0)
+                        *lerp(Color::new(p.data), c0, 2.0 * d - 1.0)
                     };
                 }
             }

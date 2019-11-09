@@ -1,14 +1,14 @@
 use image::{Color, ColorRamp, Vec3};
 use rand::{Rng, StdRng};
 use serde::{de, ser};
+use serde_yaml;
 use std::convert::From;
 use std::error::Error;
 use std::fs::File;
 use std::io;
 use std::io::{Read, Write};
-use std::str::FromStr;
 use std::path::Path;
-use serde_yaml;
+use std::str::FromStr;
 
 #[derive(Debug, Copy, Clone, PartialEq, Eq)]
 pub enum Generator {
@@ -46,7 +46,8 @@ impl From<Generator> for &'static str {
 
 impl de::Deserialize for Generator {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-        where D: de::Deserializer
+    where
+        D: de::Deserializer,
     {
         let s = String::deserialize(deserializer)?;
         Self::from_str(&s).map_err(|_| de::Error::unknown_variant(&s, Generator::VARIANTS))
@@ -55,7 +56,8 @@ impl de::Deserialize for Generator {
 
 impl ser::Serialize for Generator {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where S: ser::Serializer
+    where
+        S: ser::Serializer,
     {
         serializer.serialize_str(From::from(*self))
     }
@@ -100,7 +102,8 @@ impl From<Interpolation> for &'static str {
 
 impl de::Deserialize for Interpolation {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-        where D: de::Deserializer
+    where
+        D: de::Deserializer,
     {
         let s = String::deserialize(deserializer)?;
         Self::from_str(&s).map_err(|_| de::Error::unknown_variant(&s, Interpolation::VARIANTS))
@@ -109,7 +112,8 @@ impl de::Deserialize for Interpolation {
 
 impl ser::Serialize for Interpolation {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where S: ser::Serializer
+    where
+        S: ser::Serializer,
     {
         serializer.serialize_str(From::from(*self))
     }
@@ -151,7 +155,8 @@ impl From<Noise> for &'static str {
 
 impl de::Deserialize for Noise {
     fn deserialize<D>(deserializer: D) -> Result<Self, D::Error>
-        where D: de::Deserializer
+    where
+        D: de::Deserializer,
     {
         let s = String::deserialize(deserializer)?;
         Self::from_str(&s).map_err(|_| de::Error::unknown_variant(&s, Noise::VARIANTS))
@@ -160,7 +165,8 @@ impl de::Deserialize for Noise {
 
 impl ser::Serialize for Noise {
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
-        where S: ser::Serializer
+    where
+        S: ser::Serializer,
     {
         serializer.serialize_str(From::from(*self))
     }
@@ -252,7 +258,8 @@ impl MapGeneratorConfig {
     pub fn write<P: AsRef<Path>>(&self, path: P) -> io::Result<()> {
         let mut buffer = File::create(path)?;
 
-        let contents = serde_yaml::to_string(self).map_err(|e| io::Error::new(io::ErrorKind::Other, e.description()))?;
+        let contents =
+            serde_yaml::to_string(self).map_err(|e| io::Error::new(io::ErrorKind::Other, e.description()))?;
         buffer.write_all(contents.as_bytes())
     }
 
@@ -296,12 +303,12 @@ impl MapGeneratorConfig {
         &self.light_position
     }
 
-    pub fn light(&self) -> &Color {
-        &self.light
+    pub fn light(&self) -> Color {
+        self.light
     }
 
-    pub fn dark(&self) -> &Color {
-        &self.dark
+    pub fn dark(&self) -> Color {
+        self.dark
     }
 
     pub fn output(&self) -> &String {

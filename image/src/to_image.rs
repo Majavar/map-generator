@@ -7,7 +7,7 @@ pub trait ToImage {
 }
 
 
-impl ToImage for Noise2d {
+impl ToImage for dyn Noise2d {
     fn to_image(&self) -> ImageBuffer<Luma<u8>, Vec<u8>> {
         let mut imbuf = ImageBuffer::new(256, 256);
 

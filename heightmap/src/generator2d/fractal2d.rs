@@ -1,6 +1,6 @@
 use rand::Rng;
 
-use generator2d::Generator2d;
+use super::Generator2d;
 use heightmap::{Heightmap, heightmap_from_iter};
 use noise2d::Noise2d;
 
@@ -17,11 +17,11 @@ impl<N> Fractal2d<N>
 {
     pub fn new(noise: N, scale: f64, octave: u32, lacunarity: f64, persistance: f64) -> Fractal2d<N> {
         Fractal2d {
-            noise: noise,
-            scale: scale,
-            octave: octave,
-            lacunarity: lacunarity,
-            persistance: persistance,
+            noise,
+            scale,
+            octave,
+            lacunarity,
+            persistance,
         }
     }
 
@@ -31,10 +31,10 @@ impl<N> Fractal2d<N>
         let mut amplitude = 1.0;
 
         for _ in 0..self.octave {
-            value = value + self.noise.at(x * frequency, y * frequency) * amplitude;
+            value +=  self.noise.at(x * frequency, y * frequency) * amplitude;
 
-            frequency = frequency * self.lacunarity;
-            amplitude = amplitude * self.persistance;
+            frequency *=  self.lacunarity;
+            amplitude *=  self.persistance;
         }
 
         value

@@ -9,7 +9,6 @@ pub trait Lerp {
     fn cosine(v0: f64, v1: f64, f64: f64) -> f64;
 }
 
-
 impl Lerp for f64 {
     fn lerp(v0: f64, v1: f64, t: f64) -> f64 {
         v0 * (1.0 - t) + v1 * t

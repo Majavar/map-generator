@@ -1,5 +1,3 @@
-#![feature(proc_macro)]
-
 extern crate heightmap;
 extern crate image;
 extern crate noise2d;

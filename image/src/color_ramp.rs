@@ -34,26 +34,26 @@ impl Deserialize for ColorStep {
 
         let value = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
 
         let red = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
         let green = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
         let blue = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
 
         Ok(ColorStep {
-               value: value,
+               value,
                color: Color::new([red, green, blue]),
            })
     }
 }
 
-#[derive(Clone, Deserialize, Serialize, Debug)]
+#[derive(Clone, Deserialize, Serialize, Debug, Default)]
 pub struct ColorRamp {
     colors: Vec<ColorStep>,
 }
@@ -61,13 +61,13 @@ pub struct ColorRamp {
 impl ColorRamp {
     /// Create an empty Color.
     pub fn new() -> ColorRamp {
-        ColorRamp { colors: Vec::new() }
+        Default::default()
     }
 
     pub fn add_step(&mut self, step: f64, color: Color) {
         let s = ColorStep {
             value: step,
-            color: color,
+            color,
         };
 
         match self.colors.iter().position(|ref x| x.value >= s.value) {
@@ -90,7 +90,7 @@ impl ColorRamp {
                 let s2 = &self.colors[x];
 
                 let t = (pos - s1.value) / (s2.value - s1.value);
-                lerp(&s1.color, &s2.color, t)
+                lerp(s1.color, s2.color, t)
             }
         }
     }

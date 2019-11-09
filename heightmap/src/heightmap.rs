@@ -63,14 +63,14 @@ impl Heightmap {
 
         if width == self.width && height == self.height {
             Heightmap {
-                width: width,
-                height: height,
+                width,
+                height,
                 data: self.data.clone(),
             }
         } else {
             Heightmap {
-                width: width,
-                height: height,
+                width,
+                height,
                 data: self.data
                     .chunks(self.width() as usize)
                     .skip(y as usize)
@@ -87,15 +87,15 @@ impl Heightmap {
         }
     }
 
-    pub fn heights<'a>(&'a self) -> impl Iterator<Item = &'a f64> {
+    pub fn heights(&self) -> impl Iterator<Item = &f64> {
         self.data.iter()
     }
 }
 
 pub fn heightmap_from_vec(width: u32, height: u32, data: Vec<f64>) -> Heightmap {
     Heightmap {
-        width: width,
-        height: height,
+        width,
+        height,
         data: data.into_boxed_slice(),
     }
 }

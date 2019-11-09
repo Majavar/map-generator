@@ -4,9 +4,10 @@ use rand::Rng;
 
 use std::cmp::max;
 
-use generator2d::Generator2d;
+use super::Generator2d;
 use heightmap::{Heightmap, heightmap_from_vec};
 
+#[derive(Default)]
 pub struct Diamond2d {}
 
 pub fn square<R>(data: &mut Vec<f64>, x: usize, y: usize, size: usize, d: usize, sampler: &mut Range<f64>, rng: &mut R)
@@ -38,19 +39,19 @@ pub fn diamond<R>(data: &mut Vec<f64>,
     let idx = |x: usize, y: usize| y * size + x;
 
     if x > 0 {
-        sum = sum + data[idx(x - d, y)];
+        sum += data[idx(x - d, y)];
         count += 1.0;
     }
     if x < size - 1 {
-        sum = sum + data[idx(x + d, y)];
+        sum += data[idx(x + d, y)];
         count += 1.0;
     }
     if y > 0 {
-        sum = sum + data[idx(x, y - d)];
+        sum += data[idx(x, y - d)];
         count += 1.0;
     }
     if y < size - 1 {
-        sum = sum + data[idx(x, y + d)];
+        sum += data[idx(x, y + d)];
         count += 1.0;
     }
 
@@ -60,7 +61,7 @@ pub fn diamond<R>(data: &mut Vec<f64>,
 
 impl Diamond2d {
     pub fn new() -> Diamond2d {
-        Diamond2d {}
+        Default::default()
     }
 }
 

@@ -35,13 +35,13 @@ impl Deserialize for Color {
 
         let red = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
         let green = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
         let blue = iter.next()
             .map(|s| s.parse().map_err(D::Error::custom))
-            .unwrap_or(Err(D::Error::custom("missing value")))?;
+            .unwrap_or_else(||Err(D::Error::custom("missing value")))?;
 
         Ok(Color::new([red, green, blue]))
     }
@@ -59,24 +59,24 @@ impl Color {
         Color(Rgb(rgb))
     }
 
-    pub fn red(&self) -> u8 {
+    pub fn red(self) -> u8 {
         self.0.data[0]
     }
 
-    pub fn green(&self) -> u8 {
+    pub fn green(self) -> u8 {
         self.0.data[1]
     }
 
-    pub fn blue(&self) -> u8 {
+    pub fn blue(self) -> u8 {
         self.0.data[2]
     }
 }
 
-pub fn lerp(left: &Color, right: &Color, t: f64) -> Color {
+pub fn lerp(left: Color, right: Color, t: f64) -> Color {
     if t < 0.0 {
-        *left
+        left
     } else if t > 1.0 {
-        *right
+        right
     } else {
         let f = |l, r| {
             let (tl, tr): (u8, u8) = (l, r);

@@ -2,7 +2,7 @@
 width: 1024
 height: 1024
 generator: fractal
-noise: gradient
+noise: simplex
 scale: 2
 octave: 10
 lacunarity: 2

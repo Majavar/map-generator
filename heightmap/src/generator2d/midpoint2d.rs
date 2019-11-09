@@ -4,14 +4,15 @@ use rand::Rng;
 
 use std::cmp::max;
 
-use generator2d::Generator2d;
+use super::Generator2d;
 use heightmap::{Heightmap, heightmap_from_vec};
 
+#[derive(Default)]
 pub struct Midpoint2d {}
 
 impl Midpoint2d {
     pub fn new() -> Midpoint2d {
-        Midpoint2d {}
+        Default::default()
     }
 }
 

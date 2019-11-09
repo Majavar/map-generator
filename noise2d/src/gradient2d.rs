@@ -18,7 +18,7 @@ pub struct Gradient2d<F> {
 
 impl Vector2 {
     pub fn new(x: f64, y: f64) -> Vector2 {
-        Vector2 { x: x, y: y }
+        Vector2 { x, y }
     }
 
     pub fn zero() -> Vector2 {
@@ -48,9 +48,9 @@ impl<F> Gradient2d<F>
         }
 
         Gradient2d {
-            permutations: permutations,
-            gradients: gradients,
-            interpolate: interpolate,
+            permutations,
+            gradients,
+            interpolate,
         }
     }
 
