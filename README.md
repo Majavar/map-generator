@@ -1,16 +1,16 @@
 # Map Generator
 
 ## description
-Generate a height map based on a fractal function.
+Generate a random height map based on a fractal function.
 
 ## noises
 ### midpoint
-[[https://github.com/Majavar/map-generator-images/blob/master/midpoint.png|alt=midpoint]]
+![midpoint](https://raw.githubusercontent.com/Majavar/map-generator-images/master/midpoint.png)
 ### diamond
-[[https://github.com/Majavar/map-generator-images/blob/master/diamond.png|alt=diamond]]
+![diamond](https://raw.githubusercontent.com/Majavar/map-generator-images/master/diamond.png)
 ### value noise
-[[https://github.com/Majavar/map-generator-images/blob/master/value.png|alt=value]]
+![value](https://raw.githubusercontent.com/Majavar/map-generator-images/master/value.png)
 ### gradient noise
-[[https://github.com/Majavar/map-generator-images/blob/master/gradient.png|alt=gradient]]
+![gradient](https://raw.githubusercontent.com/Majavar/map-generator-images/master/gradient.png)
 ### simplex noise
-[[https://github.com/Majavar/map-generator-images/blob/master/simplex.png|alt=simplex]]
+![simplex](https://raw.githubusercontent.com/Majavar/map-generator-images/master/simplex.png)
